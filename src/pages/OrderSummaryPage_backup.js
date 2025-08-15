@@ -561,7 +561,19 @@ const OrderSummaryPage = () => {
                                 className="editable-text"
                                 title="點擊編輯客戶名稱"
                               >
-                                👤 {order.customer}
+                                👤 {order.customerLink ? (
+                                  <a 
+                                    href={order.customerLink} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer" 
+                                    className="customer-link"
+                                    style={{ color: '#007bff', textDecoration: 'none' }}
+                                  >
+                                    {order.customer}
+                                  </a>
+                                ) : (
+                                  order.customer
+                                )}
                               </span>
                             </div>
                           )}
@@ -597,7 +609,7 @@ const OrderSummaryPage = () => {
                             className="add-link-btn-table"
                             title={order.customerLink ? '編輯客戶連結' : '添加客戶連結'}
                           >
-                            {order.customerLink ? '🔗' : '➕'}
+                            📝
                           </button>
                         </div>
                       </td>
@@ -782,7 +794,21 @@ const OrderSummaryPage = () => {
                   <div className="info-grid">
                     <div className="info-item">
                       <label>客戶姓名：</label>
-                      <span>{selectedOrder.customer}</span>
+                      <span>
+                        {selectedOrder.customerLink ? (
+                          <a 
+                            href={selectedOrder.customerLink} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="customer-link"
+                            style={{ color: '#007bff', textDecoration: 'none' }}
+                          >
+                            {selectedOrder.customer}
+                          </a>
+                        ) : (
+                          selectedOrder.customer
+                        )}
+                      </span>
                     </div>
                     <div className="info-item">
                       <label>聯絡電話：</label>

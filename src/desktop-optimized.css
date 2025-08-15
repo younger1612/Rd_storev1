@@ -1,0 +1,242 @@
+/* 桌面螢幕優化樣式 - 全域設定 */
+
+/* 全域變數 - 桌面優化 */
+:root {
+  --desktop-max-width: 1600px;
+  --desktop-padding: 30px;
+  --desktop-border-radius: 16px;
+  --desktop-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --desktop-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.15);
+  --desktop-bg-primary: #f5f7fa;
+  --desktop-bg-secondary: #ffffff;
+  --desktop-text-primary: #333;
+  --desktop-text-secondary: #666;
+  --desktop-spacing: 25px;
+}
+
+/* 基本頁面結構優化 */
+.page-container {
+  max-width: var(--desktop-max-width);
+  margin: 0 auto;
+  padding: var(--desktop-padding);
+  background: var(--desktop-bg-primary);
+  min-height: calc(100vh - 140px);
+}
+
+.content-card {
+  background: var(--desktop-bg-secondary);
+  border-radius: var(--desktop-border-radius);
+  box-shadow: var(--desktop-shadow);
+  padding: var(--desktop-spacing);
+  margin-bottom: var(--desktop-spacing);
+  transition: all 0.3s ease;
+}
+
+.content-card:hover {
+  box-shadow: var(--desktop-shadow-hover);
+  transform: translateY(-2px);
+}
+
+/* 表格優化 */
+.desktop-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: var(--desktop-border-radius);
+  overflow: hidden;
+  box-shadow: var(--desktop-shadow);
+}
+
+.desktop-table th {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 18px 15px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--desktop-text-primary);
+  border-bottom: 2px solid #dee2e6;
+  font-size: 0.95rem;
+}
+
+.desktop-table td {
+  padding: 18px 15px;
+  border-bottom: 1px solid #f1f3f4;
+  vertical-align: middle;
+  font-size: 0.95rem;
+}
+
+.desktop-table tr:hover {
+  background: linear-gradient(90deg, #f8f9fa 0%, #ffffff 100%);
+  transition: all 0.3s ease;
+}
+
+/* 按鈕優化 */
+.desktop-btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.desktop-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.desktop-btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.desktop-btn-secondary {
+  background: #f8f9fa;
+  color: var(--desktop-text-primary);
+  border: 1px solid #dee2e6;
+}
+
+.desktop-btn-danger {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+}
+
+/* 表單優化 */
+.desktop-form-group {
+  margin-bottom: 20px;
+}
+
+.desktop-form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--desktop-text-primary);
+}
+
+.desktop-form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.desktop-form-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* 網格系統 */
+.desktop-grid {
+  display: grid;
+  gap: var(--desktop-spacing);
+}
+
+.desktop-grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.desktop-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.desktop-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.desktop-grid-auto {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* 響應式網格 */
+@media (max-width: 1200px) {
+  .desktop-grid-4 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .desktop-grid-3,
+  .desktop-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .desktop-grid-2,
+  .desktop-grid-3,
+  .desktop-grid-4 {
+    grid-template-columns: 1fr;
+  }
+  
+  .page-container {
+    padding: 15px;
+  }
+}
+
+/* 大螢幕優化 */
+@media (min-width: 1400px) {
+  :root {
+    --desktop-max-width: 1800px;
+    --desktop-padding: 40px;
+    --desktop-spacing: 30px;
+  }
+
+  .desktop-table th,
+  .desktop-table td {
+    padding: 20px 18px;
+    font-size: 1rem;
+  }
+
+  .desktop-btn {
+    padding: 14px 28px;
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  :root {
+    --desktop-max-width: 2000px;
+    --desktop-padding: 50px;
+    --desktop-spacing: 35px;
+  }
+
+  .desktop-table th,
+  .desktop-table td {
+    padding: 22px 20px;
+    font-size: 1.05rem;
+  }
+
+  .desktop-btn {
+    padding: 16px 32px;
+    font-size: 1.05rem;
+  }
+}
+
+@media (min-width: 2560px) {
+  :root {
+    --desktop-max-width: 2400px;
+    --desktop-padding: 60px;
+    --desktop-spacing: 40px;
+  }
+
+  .desktop-table th,
+  .desktop-table td {
+    padding: 25px 20px;
+    font-size: 1.1rem;
+  }
+
+  .desktop-btn {
+    padding: 18px 36px;
+    font-size: 1.1rem;
+  }
+
+  .desktop-grid-auto {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+}

@@ -1,73 +1,61 @@
 import React from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
+import { Link, useLocation } from 'react-router-dom';
 import './Layout.css';
 
-const Layout = ({ children }) => {
-  const { user, logout } = useAuth();
+const Layout = ({ children, onLogout }) => {
   const location = useLocation();
-  const navigate = useNavigate();
 
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
+  const isActive = (path) => {
+    return location.pathname === path;
   };
-
-  const navigationItems = [
-    {
-      path: '/dashboard/orders',
-      label: '訂單總覽',
-      icon: '📊'
-    },
-    {
-      path: '/inventory/order',
-      label: '庫存下單',
-      icon: '📦'
-    },
-    {
-      path: '/purchases/monthly',
-      label: '進貨管理',
-      icon: '📋'
-    }
-  ];
 
   return (
     <div className="layout">
-      <header className="layout-header">
-        <div className="header-content">
-          <h1 className="header-title">🧰 Rd Store 管理系統</h1>
-          <div className="header-user">
-            <span className="user-info">
-              {user?.username} ({user?.role === 'admin' ? '管理員' : '店員'})
-            </span>
-            <button onClick={handleLogout} className="logout-btn">
-              登出
+      <header className="header">
+        <div className="header-container">
+          <div className="logo">
+            <h1>🏪 RD Store 庫存管理系統</h1>
+          </div>
+          <nav className="navigation">
+            <Link 
+              to="/purchase" 
+              className={`nav-link ${isActive('/purchase') ? 'active' : ''}`}
+            >
+              📋 進貨管理
+            </Link>
+            <Link 
+              to="/inventory" 
+              className={`nav-link ${isActive('/inventory') ? 'active' : ''}`}
+            >
+              📦 庫存下單
+            </Link>
+            <Link 
+              to="/orders" 
+              className={`nav-link ${isActive('/orders') ? 'active' : ''}`}
+            >
+              📊 訂單總覽
+            </Link>
+          </nav>
+          <div className="user-actions">
+            <button onClick={onLogout} className="logout-btn">
+              🚪 登出
             </button>
           </div>
         </div>
       </header>
-
-      <div className="layout-body">
-        <nav className="layout-sidebar">
-          <ul className="nav-list">
-            {navigationItems.map((item) => (
-              <li key={item.path} className="nav-item">
-                <Link
-                  to={item.path}
-                  className={`nav-link ${location.pathname === item.path ? 'active' : ''}`}
-                >
-                  <span className="nav-icon">{item.icon}</span>
-                  <span className="nav-label">{item.label}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <main className="layout-main">
-          {children}
-        </main>
-      </div>
+      <main className="main-content">
+        {children}
+      </main>
+      <footer className="footer">
+        <div className="footer-container">
+          <p>&copy; 2025 RD Store 庫存管理系統. All rights reserved.</p>
+          <div className="footer-info">
+            <span>🌐 支援網路存取</span>
+            <span>💾 PostgreSQL 資料庫</span>
+            <span>📱 手機友善介面</span>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

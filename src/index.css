@@ -32,6 +32,7 @@ button {
   -webkit-font-smoothing: inherit;
   -moz-osx-font-smoothing: inherit;
   -webkit-appearance: none;
+  appearance: none;
 }
 button::-moz-focus-inner {
   border: 0;
@@ -55,12 +56,12 @@ input[type="text"] {
 }
 body {
   width: 100%;
-  margin: 0 auto;
-  font:
-    1.6rem/1.25 Arial,
-    sans-serif;
-  background-color: #f5f5f5;
-  color: #4d4d4d;
+  max-width: none;
+  margin: 0;
+  font: 1.6rem/1.25 -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', Arial, sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  scroll-behavior: smooth;
 }
 @media screen and (min-width: 620px) {
   body {
@@ -161,6 +162,7 @@ body {
   }
 }
 .todoapp > * {
+  max-width: 50rem;
   margin-left: auto;
   margin-right: auto;
 }
@@ -291,4 +293,48 @@ body {
 }
 .c-cb > input[type="checkbox"]:checked + label::after {
   opacity: 1;
+}
+
+/* 桌面螢幕優化樣式 */
+@media screen and (min-width: 1400px) {
+  body {
+    font-size: 1.8rem;
+    line-height: 1.4;
+  }
+
+  .btn {
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  body {
+    font-size: 2rem;
+    line-height: 1.5;
+  }
+
+  .btn {
+    padding: 1.2rem 2rem;
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  body {
+    font-size: 2.2rem;
+    line-height: 1.6;
+  }
+
+  .btn {
+    padding: 1.5rem 2.5rem;
+    font-size: 1.4rem;
+  }
 }
