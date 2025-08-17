@@ -230,6 +230,14 @@ html {
   width: 120px;
 }
 
+/* 排序指示器樣式 */
+.sort-indicator {
+  color: #667eea;
+  font-weight: bold;
+  font-size: 16px;
+  margin-left: 4px;
+}
+
 .product-row {
   transition: all 0.2s ease;
   border-bottom: 1px solid #f1f5f9;
@@ -4199,11 +4207,11 @@ html {
 }
 
 /* 下拉選單樣式 */
-.category-filter {
+.category-filter, .sort-filter {
   margin-bottom: 20px;
 }
 
-.category-filter label {
+.category-filter label, .sort-filter label {
   display: block;
   margin-bottom: 8px;
   font-size: 14px;
@@ -4211,7 +4219,7 @@ html {
   color: #2d3748;
 }
 
-.category-filter select {
+.category-filter select, .sort-filter select {
   width: 100%;
   padding: 12px 16px;
   border: 2px solid #e2e8f0;
@@ -4230,15 +4238,33 @@ html {
   padding-right: 40px;
 }
 
-.category-filter select:hover {
+.category-filter select:hover, .sort-filter select:hover {
   border-color: #cbd5e0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.category-filter select:focus {
+.category-filter select:focus, .sort-filter select:focus {
   outline: none;
   border-color: #667eea;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+}
+
+/* 排序選擇器特殊樣式 */
+.sort-filter label {
+  color: #4a5568;
+}
+
+.sort-filter select {
+  border-color: #d2d6dc;
+}
+
+.sort-filter select:hover {
+  border-color: #9ca3af;
+}
+
+.sort-filter select:focus {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
 }
 
 /* 模態窗口中的下拉選單樣式 */
@@ -4286,7 +4312,7 @@ html {
 
 /* 響應式設計 - 下拉選單 */
 @media (max-width: 768px) {
-  .category-filter select {
+  .category-filter select, .sort-filter select {
     padding: 10px 12px;
     padding-right: 36px;
     font-size: 13px;

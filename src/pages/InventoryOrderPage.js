@@ -422,6 +422,9 @@ const InventoryOrderPage = () => {
   // 分頁相關狀態
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6); // 每頁顯示6個商品
+  
+  // 排序相關狀態
+  const [sortOption, setSortOption] = useState('price-high-to-low'); // 預設按價格由高到低
 
   // 產品分類定義
   const categories = [
@@ -1969,10 +1972,43 @@ const InventoryOrderPage = () => {
     return category || '其他';
   };
 
+  // 排序函數
+  const sortProducts = (products, sortOption) => {
+    const sortedProducts = [...products];
+    
+    switch (sortOption) {
+      case 'price-high-to-low':
+        return sortedProducts.sort((a, b) => {
+          const priceA = a.current_price !== undefined ? a.current_price : a.price;
+          const priceB = b.current_price !== undefined ? b.current_price : b.price;
+          return priceB - priceA;
+        });
+      case 'price-low-to-high':
+        return sortedProducts.sort((a, b) => {
+          const priceA = a.current_price !== undefined ? a.current_price : a.price;
+          const priceB = b.current_price !== undefined ? b.current_price : b.price;
+          return priceA - priceB;
+        });
+      case 'name-a-to-z':
+        return sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
+      case 'name-z-to-a':
+        return sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
+      case 'stock-high-to-low':
+        return sortedProducts.sort((a, b) => b.stock - a.stock);
+      case 'stock-low-to-high':
+        return sortedProducts.sort((a, b) => a.stock - b.stock);
+      default:
+        return sortedProducts;
+    }
+  };
+
   // 過濾產品根據選擇的分類
-  const filteredProducts = selectedCategory === 'All' 
+  const baseFilteredProducts = selectedCategory === 'All' 
     ? products 
     : products.filter(product => product.category === selectedCategory);
+    
+  // 排序後的產品
+  const filteredProducts = sortProducts(baseFilteredProducts, sortOption);
 
   // 分頁計算
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
@@ -1980,10 +2016,10 @@ const InventoryOrderPage = () => {
   const endIndex = startIndex + itemsPerPage;
   const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
 
-  // 當篩選條件變更時，重置到第一頁
+  // 當篩選條件或排序選項變更時，重置到第一頁
   useEffect(() => {
     setCurrentPage(1);
-  }, [selectedCategory]);
+  }, [selectedCategory, sortOption]);
 
   // 分頁控制函數
   const goToPage = (page) => {
@@ -2103,6 +2139,24 @@ const InventoryOrderPage = () => {
             </select>
           </div>
 
+          {/* 排序選擇區域 */}
+          <div className="sort-filter">
+            <label htmlFor="sort-select" className="sort-label">排序方式：</label>
+            <select
+              id="sort-select"
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value)}
+              className="sort-select"
+            >
+              <option value="price-high-to-low">價格：高到低</option>
+              <option value="price-low-to-high">價格：低到高</option>
+              <option value="name-a-to-z">名稱：A到Z</option>
+              <option value="name-z-to-a">名稱：Z到A</option>
+              <option value="stock-high-to-low">庫存：多到少</option>
+              <option value="stock-low-to-high">庫存：少到多</option>
+            </select>
+          </div>
+
           {showNewProductForm && (
             <div className="new-product-form">
               <h3>新增庫存產品</h3>
@@ -2219,8 +2273,16 @@ const InventoryOrderPage = () => {
                     <tr>
                       <th>分類</th>
                       <th>商品名稱</th>
-                      <th>價格</th>
-                      <th>庫存</th>
+                      <th>
+                        價格 
+                        {sortOption === 'price-high-to-low' && <span className="sort-indicator"> ↓</span>}
+                        {sortOption === 'price-low-to-high' && <span className="sort-indicator"> ↑</span>}
+                      </th>
+                      <th>
+                        庫存
+                        {sortOption === 'stock-high-to-low' && <span className="sort-indicator"> ↓</span>}
+                        {sortOption === 'stock-low-to-high' && <span className="sort-indicator"> ↑</span>}
+                      </th>
                       <th>規格</th>
                       <th>操作</th>
                     </tr>
