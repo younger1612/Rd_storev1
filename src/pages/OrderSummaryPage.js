@@ -298,9 +298,7 @@ const OrderSummaryPage = () => {
         order.id === orderId 
           ? { 
               ...order, 
-              [field === 'customer' ? 'customer' : field]: newValue,
-              // 特殊處理客戶連結
-              ...(field === 'customerLink' ? { customerLink: editingValue } : {})
+              [field]: newValue
             }
           : order
       );
@@ -561,44 +559,46 @@ const OrderSummaryPage = () => {
                                 className="editable-text"
                                 title="點擊編輯客戶名稱"
                               >
-                                👤 {order.customer}
+                                {order.customer}
                               </span>
                             </div>
                           )}
                           
                           {/* 聯絡資訊 */}
-                          <div className="contact-links-table">
+                          <div className="contact-info-simple">
                             {order.customerPhone && (
-                              <a href={`tel:${order.customerPhone}`} className="contact-link-table" title="撥打電話">
-                                📞
-                              </a>
+                              <div className="contact-item">
+                                電話: {order.customerPhone}
+                              </div>
                             )}
                             {order.customerEmail && (
-                              <a href={`mailto:${order.customerEmail}`} className="contact-link-table" title="發送郵件">
-                                📧
-                              </a>
+                              <div className="contact-item">
+                                郵件: {order.customerEmail}
+                              </div>
                             )}
-                            {order.customerLink && (
-                              <a 
-                                href={order.customerLink} 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
-                                className="contact-link-table"
-                                title="查看客戶資料"
-                              >
-                                🔗
-                              </a>
+                            {order.customerLink ? (
+                              <div className="contact-item">
+                                <a 
+                                  href={order.customerLink} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer" 
+                                  className="customer-link"
+                                >
+                                  客戶資料
+                                </a>
+                              </div>
+                            ) : (
+                              <div className="contact-item">
+                                <span 
+                                  onClick={() => startEdit(order.id, 'customerLink', '')}
+                                  className="editable-text add-link-text"
+                                  title="點擊添加客戶資料連結"
+                                >
+                                  添加客戶資料
+                                </span>
+                              </div>
                             )}
                           </div>
-                          
-                          {/* 編輯客戶連結按鈕 */}
-                          <button
-                            onClick={() => startEdit(order.id, 'customerLink', order.customerLink || '')}
-                            className="add-link-btn-table"
-                            title={order.customerLink ? '編輯客戶連結' : '添加客戶連結'}
-                          >
-                            {order.customerLink ? '🔗' : '➕'}
-                          </button>
                         </div>
                       </td>
 

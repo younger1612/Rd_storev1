@@ -262,6 +262,64 @@
   color: #1f2937;
 }
 
+.contact-info-simple {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.contact-item {
+  padding: 2px 0;
+}
+
+.customer-link {
+  color: #667eea;
+  text-decoration: underline;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.customer-link:hover {
+  color: #4f46e5;
+  text-decoration: underline;
+  background-color: rgba(102, 126, 234, 0.1);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.add-link-text {
+  color: #9ca3af;
+  cursor: pointer;
+  font-style: italic;
+  transition: all 0.3s ease;
+}
+
+.add-link-text:hover {
+  color: #667eea;
+  background-color: rgba(102, 126, 234, 0.1);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.customer-phone-table {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.customer-phone-table .editable-text {
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.customer-phone-table .editable-text:hover {
+  background-color: #f3f4f6;
+}
+
 .contact-links-table {
   display: flex;
   gap: 8px;
@@ -272,9 +330,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
+  padding: 4px 8px;
+  border-radius: 4px;
   background: #f3f4f6;
   color: #6b7280;
   text-decoration: none;
@@ -290,7 +347,13 @@
   box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
 }
 
-.add-link-btn-table {
+.edit-buttons-table {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.edit-contact-btn-table {
   background: none;
   border: 1px solid #d1d5db;
   color: #6b7280;
@@ -298,12 +361,14 @@
   height: 24px;
   border-radius: 50%;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 12px;
   transition: all 0.3s ease;
-  align-self: flex-start;
 }
 
-.add-link-btn-table:hover {
+.edit-contact-btn-table:hover {
   background: #667eea;
   color: white;
   border-color: #667eea;
@@ -768,7 +833,7 @@
 .summary-section h4 {
   margin: 0 0 15px 0;
   color: #374151;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   font-weight: 600;
 }
 
@@ -785,15 +850,16 @@
 }
 
 .info-item label {
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: #6b7280;
 }
 
 .info-item span,
 .info-item a {
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: #1f2937;
+  font-weight: 500;
 }
 
 .info-item a {
@@ -850,6 +916,9 @@
   border: 1px solid #e5e7eb;
   line-height: 1.6;
   margin: 0;
+  color: #000000;
+  font-size: 1.1rem;
+  font-weight: 500;
 }
 
 /* 載入指示器 */
